@@ -1,0 +1,23 @@
+{
+  "reviewer_name": "AWS Developer Exam",
+  "questions": [
+    {
+      "question": "What is Love?",
+      "answer": "Twice",
+      "other_choices": [
+        "Once",
+        "Thrice"
+      ],
+      "tips": ""
+    },
+    {
+      "question": "Where is the Love?",
+      "answer": "Blackeyed Peas",
+      "other_choices": [
+        "What's wrong with the world Momma?",
+        "People livin' like they ain't got no Mommas"
+      ],
+      "tips": ""
+    }
+  ]
+}
