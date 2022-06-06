@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 
 class Choice extends Component {
-  state = {  } 
-  render() { 
+  render() {
+    const { choice } = this.props
     return (
       <div>
-        <input type="radio" onClick={ this.props.getAnswer }/>
-        <p>{ this.props.choice }</p>
+          <a className="f6 link dim br2 ph3 pv2 mb2 dib white bg-light-purple" href="#0">{ choice }</a>
       </div>
     );
   }
