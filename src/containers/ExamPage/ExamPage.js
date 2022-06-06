@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-// import AnswerBtn from '../../Components/ExamButtons/AnswerBtn';
-import Question from '../../Components/Question/Question';
+// import AnswerBtn from '../../components/ExamButtons/AnswerBtn';
+import Question from '../../components/Question/Question';
 
 class ExamPage extends Component {
   constructor () {
