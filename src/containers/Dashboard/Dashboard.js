@@ -32,7 +32,7 @@ class Dashboard extends Component {
       page = <ExamPage reviewer={ reviewer }/>
     }
     return (
-      <div>
+      <div className='h-100 pa5 ma5'>
         <h2>Dashboard</h2>
         <button onClick={ this.onStartExam }>Start Exam</button>
         { page }
