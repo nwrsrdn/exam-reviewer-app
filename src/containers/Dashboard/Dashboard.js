@@ -17,12 +17,12 @@ class Dashboard extends Component {
     })
   }
 
-  async getReviewer () {
+  getReviewer () {
     fetch('/reviewers/aws-developer-reviewer.json')
-    .then((response) => response.json())
-    .then((reviewer) => {
-      this.setState({ reviewer: reviewer })
-    })
+      .then((response) => response.json())
+      .then((reviewer) => {
+        this.setState({ reviewer: reviewer })
+      })
   }
 
   render() {
