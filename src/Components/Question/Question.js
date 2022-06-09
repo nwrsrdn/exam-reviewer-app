@@ -42,7 +42,7 @@ class Question extends Component {
   render() { 
     const { currentQuestion } = this.state
     return (
-      <div>
+      <div className='w-75 bg-pink ma3 pa2 ph4 br2'>
         <h3>{ currentQuestion.question }</h3>
         <Choices choices={ currentQuestion.choices } getAnswer={ this.props.getAnswer }/>
       </div>

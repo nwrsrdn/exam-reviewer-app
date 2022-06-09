@@ -12,9 +12,7 @@ class Choices extends Component {
 
     return (
       <div className='pa3 mw-100'>
-        <div className='list pl0 measure mw-100'>
-          { choice }
-        </div>
+        { choice }
       </div>
     );
   }
