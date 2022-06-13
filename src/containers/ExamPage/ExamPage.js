@@ -1,68 +1,33 @@
 import React, { Component } from 'react'
-// import AnswerBtn from '../../components/ExamButtons/AnswerBtn';
+
 import Question from '../../components/Question/Question';
+import Choices from "../../components/Choices/Choices";
+// import AnswerBtn from '../../components/ExamButtons/AnswerBtn';
 
 class ExamPage extends Component {
-  constructor () {
-    super()
-    this.state = {
-      reviewer: {},
-      questionsList: [
-        {
-          questionNo: 0,
-          question: '',
-          choices: [],
-          correctAnswer: '',
-          tips: ''
-        }
-      ],
-      answers: [
-        {
-          questionNo: 0,
-          myAnswer: '',
-          isCorrect: false
-        }
-      ],
-      score: 0
-    }
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    return {
-      reviewer: props.reviewer
-    };
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.reviewer !== this.state.reviewer) {
-      this.parseQuestionsList()
-    }
-  }
-
   render() {
+    const currentQuestion = this.parseQuestionsList()
+    const choices = []
+    
     return (
-      <div>
-        <h4>{ this.state.reviewer.reviewer_name }</h4>
-        <Question questions={ this.state.questionsList }/>
-      </div>
+      <>
+        <Question question={ currentQuestion }/>
+        <Choices choices={ choices }/>
+      </>
     );
   }
 
   parseQuestionsList () {
-    const { questions } = this.state.reviewer
+    const { reviewer } = this.props
+    const questions = reviewer.results
 
-    const questionsList = questions.map(({ question, answer, other_choices, tips }, index) => {
+    return questions.map(({ question, correct_answer, incorrect_answers }, index) => {
       return {
         question,
-        tips,
-        correctAnswer: answer,
-        questionNo: index,
-        choices: [...other_choices, answer],
+        correctAnswer: correct_answer,
+        questionNo: index+1,
+        choices: [...incorrect_answers, correct_answer],
       }
-    })
-
-    this.setState({
-      questionsList: questionsList
     })
   }
 }

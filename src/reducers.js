@@ -1,7 +1,10 @@
 import {
   REQUEST_REVIEWER_PENDING,
   REQUEST_REVIEWER_SUCCESS,
-  REQUEST_REVIEWER_FAILED
+  REQUEST_REVIEWER_FAILED,
+  PREV_QUESTION,
+  NEXT_QUESTION,
+  SKIP_QUESTION,
 } from "./constants";
 
 const initialStateQuestionaire = {
@@ -35,4 +38,26 @@ export const requestReviewer = (state = initialStateQuestionaire, action = {}) =
     default:
       return state
   }
+}
+
+const initialStateCurrentQuestion = {}
+
+export const getCurrentQuestion = (state = initialStateCurrentQuestion, action = {}) => {
+  switch (action.type) {
+    case PREV_QUESTION:
+      return {}
+    case NEXT_QUESTION:
+      return {}
+    case SKIP_QUESTION:
+      return {}
+  
+    default:
+      break;
+  }
+}
+
+const initialStateCurrentAnswer = {}
+
+export const getCurrentAnswer = (state = initialStateCurrentAnswer, action = {}) => {
+  //
 }

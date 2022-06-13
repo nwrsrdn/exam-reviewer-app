@@ -1,12 +1,18 @@
 import {
   REQUEST_REVIEWER_PENDING,
   REQUEST_REVIEWER_SUCCESS,
-  REQUEST_REVIEWER_FAILED
+  REQUEST_REVIEWER_FAILED,
+  PREV_QUESTION,
+  NEXT_QUESTION,
+  SKIP_QUESTION,
 } from "./constants";
 
 export const requestReviewer = () => (dispatch) => {
   dispatch({ type: REQUEST_REVIEWER_PENDING })
-  fetch('/reviewers/aws-developer-reviewer.json')
+
+  const url = 'https://opentdb.com/api.php?amount=10&category=18&type=multiple'
+
+  fetch(url)
       .then((response) => response.json())
       .then((reviewer) => dispatch({
         type: REQUEST_REVIEWER_SUCCESS,
@@ -16,4 +22,8 @@ export const requestReviewer = () => (dispatch) => {
         type: REQUEST_REVIEWER_FAILED,
         payload: error
       }))
+}
+
+export const getCurrentQuestion = dispatch => {
+  //
 }

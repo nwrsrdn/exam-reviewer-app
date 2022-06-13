@@ -1,44 +1,45 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
+
 import ExamPage from '../ExamPage/ExamPage';
 
+import { requestReviewer } from "../../actions";
+
+const mapStateToProps = state => {
+  return {
+    isPending: state.requestReviewer.isPending,
+    reviewer: state.requestReviewer.reviewer,
+    error: state.requestReviewer.error
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onStartExam: event => dispatch(requestReviewer())
+  }
+}
+
 class Dashboard extends Component {
-  constructor() {
-    super()
-    this.state = {
-      startExam: false,
-      reviewer: {}
-    }
-  }
-
-  onStartExam = () => {
-    this.getReviewer()
-    this.setState({
-      startExam: true
-    })
-  }
-
-  getReviewer () {
-    fetch('/reviewers/aws-developer-reviewer.json')
-      .then((response) => response.json())
-      .then((reviewer) => {
-        this.setState({ reviewer: reviewer })
-      })
-  }
-
   render() {
     let page = ''
-    const { startExam, reviewer } = this.state
-    if (startExam) {
+    const { isPending, reviewer, error, onStartExam } = this.props
+    
+    if (isPending) {
+      page = <h3>Loading...</h3>
+    } else if (error) {
+      page = <h3>Error! {error}</h3>
+    } else if (Object.keys(reviewer).length > 0) {
       page = <ExamPage reviewer={ reviewer }/>
     }
+
     return (
-      <div className='h-100 pa5 ma5'>
+      <div className='h-100 pa2 ma2'>
         <h2>Dashboard</h2>
-        <button onClick={ this.onStartExam }>Start Exam</button>
+        <button onClick={ onStartExam }>Start Exam</button>
         { page }
       </div>
     );
   }
 }
  
-export default Dashboard;
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
