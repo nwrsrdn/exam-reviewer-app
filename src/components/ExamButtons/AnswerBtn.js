@@ -4,9 +4,9 @@ class AnswerBtn extends Component {
   state = {  } 
   render() { 
     return (
-      <div>
+      <>
         <input type="button" value="Answer" />
-      </div>
+      </>
     );
   }
 }

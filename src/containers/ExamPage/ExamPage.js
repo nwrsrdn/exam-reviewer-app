@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import Question from '../../components/Question/Question';
 import Choices from "../../components/Choices/Choices";
-// import AnswerBtn from '../../components/ExamButtons/AnswerBtn';
+import AnswerBtn from '../../components/ExamButtons/AnswerBtn';
 import SkipBtn from '../../components/ExamButtons/SkipBtn';
 
 import {
@@ -32,22 +32,23 @@ const mapDispatchToProps = dispatch => {
 
 class ExamPage extends Component {
   render() {
-    const { reviewer, getCurrentAnswer } = this.props
+    const {
+      reviewer,
+      getCurrentAnswer,
+      skipQuestion,
+      currentQuestion
+    } = this.props
     
     return (
       <>
-        <Question question={ reviewer[1].question }/>
-        <Choices choices={ reviewer[1].choices } getAnswer={ getCurrentAnswer }/>
+        <Question question={ reviewer[currentQuestion].question }/>
+        <Choices choices={ reviewer[currentQuestion].choices } getAnswer={ getCurrentAnswer }/>
         <div>
-          {/* <AnswerBtn getCurrentQuestion={ getCurrentQuestion }/> */}
-          <SkipBtn skipQuestion={ setQuestion }/>
+          <AnswerBtn submitAnswer={ getCurrentAnswer }/>
+          <SkipBtn skipQuestion={ skipQuestion }/>
         </div>
       </>
     );
-  }
-
-  onSkipQuestion () {
-    //
   }
 }
  

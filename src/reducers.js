@@ -68,8 +68,8 @@ export const getQuestion = (state = initialStateQuestions, action = {}) => {
   switch (action.type) {
     case SKIP_QUESTION:
       const { currentQuestion, remainingQuestions } = state
-      const questionList = remainingQuestions
-      const questionNo = (questionList.length !== 0 && currentQuestion < questionList.length-1) ? currentQuestion+1 : 0
+      const questionNo = (remainingQuestions.length !== 0 && currentQuestion < remainingQuestions.length-1) ?
+        currentQuestion+1 : 0
 
       return {
         ...state,
