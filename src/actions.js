@@ -35,6 +35,6 @@ export const setCurrentAnswer = answer => ({
   payload: answer
 })
 
-export const setQuestion = () => ({
-  type: SKIP_QUESTION,
+export const setQuestion = (action) => ({
+  type: action,
 })

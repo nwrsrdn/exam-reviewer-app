@@ -24,7 +24,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getCurrentAnswer: event => dispatch(setCurrentAnswer(event.target.value)),
-    skipQuestion: () => { dispatch(setQuestion()) }
+    setQuestion: event => dispatch(setQuestion(event.target.value)) 
     // setRemainingQuestions: () => dispatch(setRemainingQuestions()),
     // onSubmitAnswer: event => dispatch(setPreviousAnswers()),
   }
@@ -35,7 +35,7 @@ class ExamPage extends Component {
     const {
       reviewer,
       getCurrentAnswer,
-      skipQuestion,
+      setQuestion,
       currentQuestion
     } = this.props
     
@@ -44,8 +44,8 @@ class ExamPage extends Component {
         <Question question={ reviewer[currentQuestion].question }/>
         <Choices choices={ reviewer[currentQuestion].choices } getAnswer={ getCurrentAnswer }/>
         <div>
-          <AnswerBtn submitAnswer={ getCurrentAnswer }/>
-          <SkipBtn skipQuestion={ skipQuestion }/>
+          <AnswerBtn nextQuestion={ setQuestion }/>
+          <SkipBtn setQuestion={ setQuestion }/>
         </div>
       </>
     );

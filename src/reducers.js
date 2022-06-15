@@ -3,7 +3,8 @@ import {
   REQUEST_REVIEWER_SUCCESS,
   REQUEST_REVIEWER_FAILED,
   GET_ANSWER,
-  SKIP_QUESTION
+  SKIP_QUESTION,
+  NEXT_QUESTION
 } from "./constants";
 
 const initialStateReviewer = {
@@ -65,10 +66,12 @@ const initialStateQuestions = {
 }
 
 export const getQuestion = (state = initialStateQuestions, action = {}) => {
+  const { currentQuestion, remainingQuestions } = state
+  let questionNo
+
   switch (action.type) {
     case SKIP_QUESTION:
-      const { currentQuestion, remainingQuestions } = state
-      const questionNo = (remainingQuestions.length !== 0 && currentQuestion < remainingQuestions.length-1) ?
+      questionNo = (remainingQuestions.length !== 0 && currentQuestion < remainingQuestions.length-1) ?
         currentQuestion+1 : 0
 
       return {
@@ -76,6 +79,15 @@ export const getQuestion = (state = initialStateQuestions, action = {}) => {
         currentQuestion: questionNo
       }
   
+    case NEXT_QUESTION:
+      
+      questionNo = (remainingQuestions.length !== 0 && currentQuestion < remainingQuestions.length-1) ?
+        currentQuestion+1 : 0
+      return {
+        ...state,
+        currentQuestion: questionNo
+      }
+
     default:
       return state
   }

@@ -5,7 +5,7 @@ class SkipBtn extends Component {
     const { skipQuestion } = this.props
     return (
       <>
-        <button onClick={ skipQuestion }>Skip</button>
+        <button onClick={ skipQuestion } value='SKIP_QUESTION'>Skip</button>
       </>
     );
   }
