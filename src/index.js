@@ -7,13 +7,21 @@ import { createLogger } from "redux-logger";
 import { BrowserRouter } from "react-router-dom";
 
 import App from './containers/App';
-import { requestReviewer } from "./reducers";
+import {
+  requestReviewer,
+  getCurrentAnswer,
+  getQuestion
+} from "./reducers";
 
 import reportWebVitals from './reportWebVitals';
 import 'tachyons'
 
 const logger = createLogger()
-const rootReducer = combineReducers({ requestReviewer })
+const rootReducer = combineReducers({
+  requestReviewer,
+  getCurrentAnswer,
+  getQuestion
+})
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger))
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

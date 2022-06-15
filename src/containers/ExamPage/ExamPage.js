@@ -1,35 +1,54 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
 
 import Question from '../../components/Question/Question';
 import Choices from "../../components/Choices/Choices";
 // import AnswerBtn from '../../components/ExamButtons/AnswerBtn';
+import SkipBtn from '../../components/ExamButtons/SkipBtn';
+
+import {
+  setCurrentAnswer,
+  setQuestion
+} from "../../actions";
+
+const mapStateToProps = state => {
+  return {
+    currentAnswer: state.getCurrentAnswer.currentAnswer,
+    currentQuestion: state.getQuestion.currentQuestion,
+    // remainingQuestions: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+    // previousAnswers: [],
+    // correctAnswers: []
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getCurrentAnswer: event => dispatch(setCurrentAnswer(event.target.value)),
+    skipQuestion: () => { dispatch(setQuestion()) }
+    // setRemainingQuestions: () => dispatch(setRemainingQuestions()),
+    // onSubmitAnswer: event => dispatch(setPreviousAnswers()),
+  }
+}
 
 class ExamPage extends Component {
   render() {
-    const currentQuestion = this.parseQuestionsList()
-    const choices = []
+    const { reviewer, getCurrentAnswer } = this.props
     
     return (
       <>
-        <Question question={ currentQuestion }/>
-        <Choices choices={ choices }/>
+        <Question question={ reviewer[1].question }/>
+        <Choices choices={ reviewer[1].choices } getAnswer={ getCurrentAnswer }/>
+        <div>
+          {/* <AnswerBtn getCurrentQuestion={ getCurrentQuestion }/> */}
+          <SkipBtn skipQuestion={ setQuestion }/>
+        </div>
       </>
     );
   }
 
-  parseQuestionsList () {
-    const { reviewer } = this.props
-    const questions = reviewer.results
-
-    return questions.map(({ question, correct_answer, incorrect_answers }, index) => {
-      return {
-        question,
-        correctAnswer: correct_answer,
-        questionNo: index+1,
-        choices: [...incorrect_answers, correct_answer],
-      }
-    })
+  onSkipQuestion () {
+    //
   }
 }
  
-export default ExamPage;
+export default connect(mapStateToProps, mapDispatchToProps)(ExamPage);

@@ -2,9 +2,8 @@ import {
   REQUEST_REVIEWER_PENDING,
   REQUEST_REVIEWER_SUCCESS,
   REQUEST_REVIEWER_FAILED,
-  PREV_QUESTION,
-  NEXT_QUESTION,
-  SKIP_QUESTION,
+  GET_ANSWER,
+  SKIP_QUESTION
 } from "./constants";
 
 export const requestReviewer = () => (dispatch) => {
@@ -16,7 +15,14 @@ export const requestReviewer = () => (dispatch) => {
       .then((response) => response.json())
       .then((reviewer) => dispatch({
         type: REQUEST_REVIEWER_SUCCESS,
-        payload: reviewer
+        payload: reviewer.results.sort((a, b) => Math.random() - 0.5).map(({ question, correct_answer, incorrect_answers }, index) => {
+          return {
+            no: index+1,
+            question,
+            correctAnswer: correct_answer,
+            choices: [...incorrect_answers, correct_answer].sort((a, b) => Math.random() - 0.5),
+          }
+        })
       }))
       .catch(error => dispatch({
         type: REQUEST_REVIEWER_FAILED,
@@ -24,6 +30,11 @@ export const requestReviewer = () => (dispatch) => {
       }))
 }
 
-export const getCurrentQuestion = dispatch => {
-  //
-}
+export const setCurrentAnswer = answer => ({
+  type: GET_ANSWER,
+  payload: answer
+})
+
+export const setQuestion = () => ({
+  type: SKIP_QUESTION,
+})

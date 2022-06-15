@@ -27,8 +27,8 @@ class Dashboard extends Component {
     if (isPending) {
       page = <h3>Loading...</h3>
     } else if (error) {
-      page = <h3>Error! {error}</h3>
-    } else if (Object.keys(reviewer).length > 0) {
+      page = <h3>Error! { typeof error }</h3>
+    } else if (reviewer.length > 0) {
       page = <ExamPage reviewer={ reviewer }/>
     }
 
