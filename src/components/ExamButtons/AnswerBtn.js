@@ -6,7 +6,7 @@ class AnswerBtn extends Component {
     const { nextQuestion } = this.props
     return (
       <>
-        <input type="button" onClick={ nextQuestion } value="NEXT_QUESTION" />
+        <button type="button" onClick={ nextQuestion } value="NEXT_QUESTION">Answer</button>
       </>
     );
   }
